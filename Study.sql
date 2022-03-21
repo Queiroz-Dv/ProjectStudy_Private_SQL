@@ -1,6 +1,6 @@
 USE [Curso];
 -- Cria a tabela 
-DROP TABLE [Aluno];
+--DROP TABLE [Aluno];
 CREATE TABLE [dbo].[Aluno]
 (
   [Id] INT,
@@ -13,19 +13,39 @@ CREATE TABLE [dbo].[Aluno]
   CONSTRAINT [UQ_Aluno_Email] UNIQUE ([Email]),
 );
 
+USE [Curso];
+DROP TABLE [ProgressoCurso];
+CREATE TABLE [dbo].[ProgressoCurso]
+(
+  [AlunoId] INT NOT NULL,
+  [CursoId] INT NOT NULL,
+  [Progresso] INT NOT NULL,
+  [UltimaAtualizacao] DATETIME NOT NULL DEFAULT(GETDATE()),
+
+ CONSTRAINT PK_ProgressoCurso PRIMARY KEY([AlunoId], [CursoId])
+);
 
 
+CREATE TABLE [dbo].[Categoria]
+(
+  [Id] INT,
+  [Nome] NVARCHAR(80) NOT NULL,
 
-USE [Curso]
-
-ALTER TABLE [Aluno]
-    ADD [Document] NVARCHAR(11)
+  CONSTRAINT [PK_Categoria] PRIMARY KEY([Id]),
+);
 
 
--- Drop '[Document]' da tabela '[Aluno]' no banco '[Curso]'
-ALTER TABLE [dbo].[Aluno]
-    DROP COLUMN [Document]
+USE[Curso]
+DROP TABLE[Curso]
 GO
 
-ALTER TABLE [Aluno]
-    ALTER COLUMN [Document] CHAR(11)
+CREATE TABLE[Curso](
+    [Id] INT NOT NULL,
+    [Nome] NVARCHAR(88) NOT NULL,
+    [CategoriaId] INT NOT NULL,
+
+CONSTRAINT [PK_Curso] PRIMARY KEY([Id]), 
+CONSTRAINT [FK_Curso_Categoria] FOREIGN KEY([CategoriaId])
+REFERENCES [Categoria]([Id])
+);
+GO
