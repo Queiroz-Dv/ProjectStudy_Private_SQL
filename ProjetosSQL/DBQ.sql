@@ -1,5 +1,7 @@
 CREATE DATABASE[MXTARGET]
-
+GO
+USE[MXTARGET]
+GO
 -- STUDENT TABLE
 CREATE TABLE [Student]
 (
@@ -110,5 +112,26 @@ CREATE TABLE [CareerItem]
   CONSTRAINT [FK_CareerItem_Course_CourseId] 
   FOREIGN KEY ([CourseId])
   REFERENCES [Course] ([Id]),
+);
+GO
+-- StudentCourse TABLE
+CREATE TABLE [StudentCourse]
+(
+  [CourseId] UNIQUEIDENTIFIER NOT NULL,
+  [StudentId] UNIQUEIDENTIFIER NOT NULL,
+  [Progress] TINYINT NOT NULL,
+  [Favorite] BIT NOT NULL ,
+  [StartDate] DATETIME NOT NULL,
+  [LastUpdateDate] DATETIME NULL,
+
+  CONSTRAINT [PK_StudentCourse] PRIMARY KEY ([CourseId], [StudentId]),
+
+  CONSTRAINT [FK_StudentCourse_Course_CourseId] 
+  FOREIGN KEY ([CourseId])
+  REFERENCES [Course] ([Id]),
+
+  CONSTRAINT [FK_StudentCourse_Student_StudentId] 
+  FOREIGN KEY ([StudentId])
+  REFERENCES [Student] ([Id]),
 );
 GO
