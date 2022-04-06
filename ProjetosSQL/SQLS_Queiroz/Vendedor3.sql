@@ -1,0 +1,24 @@
+CREATE TABLE Vendedor3 
+(
+IdVendedor3 INT IDENTITY,
+Nome VARCHAR (30),
+CPF VARCHAR(11),
+Sexo CHAR(1),
+Janeiro FLOAT,
+Fevereiro FLOAT,
+CHECK(Sexo IN('M', 'F')),
+ )
+ GO
+
+ ALTER TABLE Vendedor3 ADD CONSTRAINT PK_Vendedor3 PRIMARY KEY(IdVendedor3)
+ ALTER TABLE Vendedor3 ADD CONSTRAINT UQ_CPF_Vendedor3 UNIQUE(CPF)
+ GO
+
+ INSERT INTO Vendedor3 VALUES
+ ('Roberto', '11111111111','M', 2000.00,1300.00),
+ ('Ana', '22222222222','F', 5200.00,1200.00),
+ ('Paulo', '33333333333','M', 1000.00,2700.00),
+ ('Maria', '44444444444','F', 2000.00,2000.00)
+ GO
+
+ SELECT * FROM Vendedor3
