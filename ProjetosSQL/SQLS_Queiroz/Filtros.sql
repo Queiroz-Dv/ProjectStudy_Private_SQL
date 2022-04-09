@@ -43,7 +43,7 @@ GO
 SELECT * FROM Pessoa WHERE Sexo = 'M'
 GO
 
--- Todos os homens com até um filho
+-- Todos os homens com ate um filho
 SELECT * FROM Pessoa WHERE Sexo = 'M' AND QtdFilhos IN(0,1)
 GO
 
@@ -59,7 +59,7 @@ GO
  SELECT * FROM Pessoa WHERE DataNasc <= '31/12/1988'
  GO
 
- -- Todas as pessoas que não possuem email
+ -- Todas as pessoas que nao possuem email
  SELECT * FROM Pessoa WHERE Email IS NULL
  GO
 
@@ -67,7 +67,7 @@ GO
  SELECT * FROM Pessoa WHERE DataNasc BETWEEN '01/01/1988' AND '31/12/1998'
  GO
 
- -- Relatório com todas as mulheres em ordem alfabética
+ -- Relatorio com todas as mulheres em ordem alfabotica
  SELECT * FROM Pessoa WHERE Sexo = 'F' ORDER BY Nome
  GO
 
@@ -79,7 +79,7 @@ GO
  SELECT * FROM Pessoa WHERE Sexo = 'F' AND QtdFilhos <> 0 AND Telefone IS NOT NULL
  GO
 
- -- Todas as mulheres que moram em SP e não tem Email
+ -- Todas as mulheres que moram em SP e nï¿½o tem Email
  SELECT * FROM Pessoa WHERE Sexo = 'F' AND Estado = 'SP' AND Email IS NULL
  GO
 
