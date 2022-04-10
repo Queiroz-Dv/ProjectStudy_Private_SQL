@@ -1,0 +1,116 @@
+CREATE TABLE Aluno
+(
+  IdAluno INTEGER NOT NULL,
+  Nome VARCHAR(30),
+  Cidade VARCHAR2(30),
+  CEP VARCHAR(10),
+  PRIMARY KEY (IdAluno)
+)
+GO
+
+SELECT * FROM Aluno
+GO
+
+INSERT INTO Aluno(IdAluno, Nome, Cidade, CEP)
+VALUES (1, 'Marcio', 'Novo Hamburgo', '9300000')
+GO
+
+INSERT INTO Aluno(IdAluno, Nome, Cidade, CEP)
+VALUES (2, 'Paula', 'Ivoti', '9300000')
+GO
+
+INSERT INTO Aluno(IdAluno, Nome, Cidade, CEP)
+VALUES (3, 'Maria', 'Sapiranga', '9300000')
+GO
+
+CREATE TABLE Curso
+(
+  IdCurso INTEGER PRIMARY KEY,
+  Nome VARCHAR2(30),
+  Valor NUMBER(8,2),
+  CargaHoraria INTEGER
+)
+GO
+
+SELECT * FROM Curso
+GO
+
+INSERT INTO Curso VALUES(1, 'Oracle SQL e PL/SQL', 500,25)
+INSERT INTO Curso VALUES(2, 'Oracle DBA', 499,25)
+INSERT INTO Curso VALUES(3, 'Java Fundamentos', 1500,100)
+INSERT INTO Curso VALUES(4, 'JavaServer Faces', 1600,100)
+GO
+
+CREATE TABLE Contrato
+(
+  IdContrato INTEGER PRIMARY KEY,
+  Data DATE,
+  IdAluno INTEGER,
+  Total NUMBER(8,2),
+  Desconto NUMBER(5,2)
+)
+GO
+
+SELECT * FROM Contrato
+GO
+
+INSERT INTO Contrato VALUES(1, SYSDATE, 1, 500, 10)
+INSERT INTO Contrato VALUES(2, SYSDATE, 2, 500, 10)
+INSERT INTO Contrato VALUES(3, SYSDATE, 3, 1500, 05)
+INSERT INTO Contrato VALUES(4, SYSDATE-5, 2, 1600, 10)
+INSERT INTO Contrato VALUES(5, SYSDATE-4, 5, 800, 10)
+INSERT INTO Contrato VALUES(6, SYSDATE-3, 5, 445, 0)
+INSERT INTO Contrato VALUES(7, SYSDATE-2, 5, 445, 20)
+GO
+
+-- Inserir Coluna na tabela
+ALTER TABLE Contrato  ADD ColTeste VARCHAR(50);
+GO
+
+SELECT * FROM Contrato;
+GO
+
+-- Excluir Coluna da Tabela
+ALTER TABLE Contrato DROP COLUMN ColTeste;
+GO
+
+--
+ALTER TABLE Aluno RENAME COLUMN Nome TO Nome2;
+ALTER TABLE Aluno RENAME COLUMN Nome2 TO Nome;
+GO
+
+SELECT * FROM Aluno;
+GO
+
+-- Sequence
+CREATE SEQUENCE SeqAluno START WITH 4;
+
+
+INSERT INTO Aluno(IdAluno, Nome, Cidade, CEP)
+VALUES (SeqAluno.NEXTVAL,'Valdo', 'Canoas', '1100000');
+GO
+
+INSERT INTO Aluno(IdAluno, Nome, Cidade, CEP)
+VALUES (SeqAluno.NEXTVAL,'Andre' ,'Ivoti', '1200000');
+
+SELECT * FROM Aluno;
+GO
+
+CREATE TABLE Item
+(
+  IdItem INTEGER PRIMARY KEY,
+  IdCurso INTEGER,
+  IdContrato INTEGER,
+  Valor NUMBER(8,2)
+)
+GO
+INSERT INTO Item VALUES (1,1,1,500);
+INSERT INTO Item VALUES (2,1,2,500);
+INSERT INTO Item VALUES (3,3,3,1500);
+INSERT INTO Item VALUES (4,4,4,1600);
+INSERT INTO Item VALUES (5,1,5,500);
+INSERT INTO Item VALUES (6,1,6,500);
+INSERT INTO Item VALUES (7,2,6,500);
+INSERT INTO Item VALUES (8,3,7,500);
+
+SELECT * FROM Item
