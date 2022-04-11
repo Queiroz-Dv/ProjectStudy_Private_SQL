@@ -1,7 +1,8 @@
-USE [Curso];
+CREATE DATABASE [CursosTarget]
+USE [CursoTarget];
 
 DROP TABLE [Aluno];
-CREATE TABLE [dbo].[Aluno]
+CREATE TABLE [Aluno]
 (
     [Id] INT,
     [Nome] NVARCHAR(80) NOT NULL,
@@ -11,7 +12,8 @@ CREATE TABLE [dbo].[Aluno]
 
     CONSTRAINT [PK_Aluno] PRIMARY KEY([Id]),
     CONSTRAINT [UQ_Aluno_Email] UNIQUE ([Email]),
-);
+)
+GO
 
 CREATE INDEX [IX_Aluno_Email] ON [Aluno]([Email])
 DROP INDEX [IX_Aluno_Email] ON [Aluno]
@@ -47,8 +49,24 @@ CREATE TABLE[Curso]
     [CategoriaId] INT NOT NULL,
 
     CONSTRAINT [PK_Curso] PRIMARY KEY([Id]),
-    CONSTRAINT [FK_Curso_Categoria] FOREIGN KEY([CategoriaId])
-REFERENCES [Categoria]([Id])
-);
+    CONSTRAINT [FK_Curso_Categoria]
+        FOREIGN KEY([CategoriaId])
+            REFERENCES [Categoria]([Id])
+)
 GO
 DROP TABLE[Curso]
+
+
+CREATE TABLE[Course]
+(
+    [Id] INT NOT NULL IDENTITY(1, 1),
+    [Name] VARCHAR(88) NOT NULL,
+    -- Referência da outra tabela
+    [CategoryId] INT NOT NULL, 
+
+    CONSTRAINT [PK_Course] PRIMARY KEY([Id]),
+    -- Adicionando chave estrangeira 
+    CONSTRAINT [FK_Course_Category]
+        FOREIGN KEY([CategoryId])
+            REFERENCES [Category]([Id])
+)
